@@ -33,7 +33,7 @@ class Jokes extends Component {
             <li key={joke.id} className="card container">
               <p>THIS IS A {joke.type} JOKE</p> <br />
               <h3>{joke.setup}</h3> <br />
-              <h4>{joke.punchline}</h4>
+              <h4>{joke.punchline}</h4><hr></hr>
             </li>
           </div>
         ))}
