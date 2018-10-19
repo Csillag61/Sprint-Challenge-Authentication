@@ -1,6 +1,6 @@
 const axios = require('axios');
 const bcrypt = require("bcryptjs");
-const { authenticate } = require('./middlewares');
+const { authenticate, generateToken } = require('./middlewares');
 const db = require("../database/dbConfig.js");
 
 module.exports = server => {
@@ -22,12 +22,13 @@ function register(req, res) {
         .where({ id })
         .first()
         .then(user => {
+          console.log(user);
           const token = generateToken(user);
           res.status(201).json({ username: user.username, id: user.id, token });
         })
-        .catch(err => res.status(500).json({ message: 'Token Error' }))
+        .catch(err => res.status(500).json({ err, message: 'Token Error' }))
     })
-    .catch(err => res.status(500).json({ message: 'Error Registering User' }))
+    .catch(err => res.status(500).json({ err, message: 'Error Registering User' }))
 }
 
 
