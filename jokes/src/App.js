@@ -34,7 +34,7 @@ class App extends Component {
 
         </Link>
         <button onClick={this.logOut}>Log out</button>
-        <h1>DO YOU ONE A GREAT JOKE?</h1>
+        <h1>DO YOU WANT A KILLER JOKE?</h1>
         <Route path="/register" render={props => <SignUp {...props} />} />
         <Route path="/login" render={props => <SignIn {...props} />} />
         <Route path="/jokes" render={props => <Jokes {...props} />} />
