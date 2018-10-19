@@ -1,32 +1,81 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: magenta;
+    height: 150px;
+    padding: 20px;
+    color: white;
+}
+
+.jumbotron h1 {
+    color: rgb(134, 42, 134);
+}
+
+h2 {
+    color: maroon;
+}
+
+.App-title {
+    font-size: 1.5em;
+}
+
+.App-intro {
+    font-size: large;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
+}
+
+.card {
+    box-shadow: 2 4px 8px 2 rgba(0, 0, 0, 0.6);
+    transition: 1.6s;
+    width: 40%;
+    background-color: rgb(243, 210, 210);
+    border-bottom: black 1px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.jumbotron .container {
+    padding: 2px 16px;
+    border: #61dafb
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 16px;
+    margin: 0 auto;
+    justify-content: space-around;
+    margin-top: 25%;
+    border: 1px solid black;
+}
+
+.jokeslist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.jumbotron {
+    background-color: lightblue;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

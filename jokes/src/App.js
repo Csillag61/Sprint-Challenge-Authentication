@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Link, withRouter } from "react-router-dom";
 import './App.css';
+import { Jumbotron } from 'reactstrap';
+
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import Jokes from './components/Jokes';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      signedIn: false
+    };
+  }
+  logOut = event => {
+    localStorage.removeItem("jwt");
+    this.props.history.push("/signin");
+  };
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    return <div className="App">
+      <Jumbotron>
+        <Link to="/login">
+          <button>Login page</button>{" "}
+        </Link>
+        <Link to="/register">
+          <button>Register page</button>{" "}
+        </Link>
+        <Link to="/jokes">
+
+          <button>Jokes</button>{" "}
+
+        </Link>
+        <button onClick={this.logOut}>Log out</button>
+        <h1>DO YOU ONE A GREAT JOKE?</h1>
+        <Route path="/register" render={props => <SignUp {...props} />} />
+        <Route path="/login" render={props => <SignIn {...props} />} />
+        <Route path="/jokes" render={props => <Jokes {...props} />} />
+      </Jumbotron>
+    </div>;
   }
 }
 
-export default App;
+export default withRouter(App);
