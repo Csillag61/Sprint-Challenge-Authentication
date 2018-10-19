@@ -1,6 +1,7 @@
 const axios = require('axios');
-
+const bcrypt = require("bcryptjs");
 const { authenticate } = require('./middlewares');
+const db = require("../database/dbConfig.js");
 
 module.exports = server => {
   server.post('/api/register', register);
@@ -9,12 +10,46 @@ module.exports = server => {
 };
 
 function register(req, res) {
-  // implement user registration
+  const creds = req.body;
+  const hash = bcrypt.hashSync(creds.password, 10);
+  creds.password = hash;
+  db('users')
+    .insert(creds)
+    .then(ids => {
+      const id = ids[0];
+
+      db('users')
+        .where({ id })
+        .first()
+        .then(user => {
+          const token = generateToken(user);
+          res.status(201).json({ username: user.username, id: user.id, token });
+        })
+        .catch(err => res.status(500).json({ message: 'Token Error' }))
+    })
+    .catch(err => res.status(500).json({ message: 'Error Registering User' }))
 }
 
+
+
 function login(req, res) {
-  // implement user login
+  const creds = req.body;
+
+  db('users')
+    .where({ username: creds.username })
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(creds.password, user.password)) {
+        const token = generateToken(user);
+        res.status(200).send({ token });
+      } else {
+        res.status(401).json({ message: 'Incorrect Login' });
+      }
+    })
+    .catch(err => res.status(500).send(err));
 }
+
+
 
 function getJokes(req, res) {
   axios
